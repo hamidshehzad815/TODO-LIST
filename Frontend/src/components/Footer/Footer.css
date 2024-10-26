@@ -1,0 +1,22 @@
+/* Footer.css */
+footer {
+  background: #333;
+  color: white;
+  padding: 1rem 5%;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+}

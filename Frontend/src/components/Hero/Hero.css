@@ -1,0 +1,23 @@
+/* Hero.css */
+.hero {
+  background: #f5f8ff;
+  padding: 8rem 5% 4rem;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #333;
+  margin-bottom: 1rem;
+  max-width: 370px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
