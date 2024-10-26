@@ -1,0 +1,6 @@
+# ignore node_modules
+node_modules
+# ignore .env
+.env
+# i have a test.js file how to add it
+some
