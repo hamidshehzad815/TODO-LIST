@@ -23,7 +23,9 @@ const CreateTask = () => {
       if (description) payload.description = description;
       if (dueDate) payload.dueDate = dueDate;
       if (priority) payload.priority = priority;
+      if (!priority) payload.priority = "low";
       if (status) payload.status = status;
+      if (!status) payload.status = "pending";
       if (assignedTo) payload.assignedTo = assignedTo;
 
       const response = await fetch("http://localhost:8000/tasks/createTask", {

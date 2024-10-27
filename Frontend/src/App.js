@@ -10,6 +10,8 @@ import AllUsers from "./components/AllUsers/AllUsers";
 import ChangeUsername from "./components/ChangeUsername/ChangeUsername";
 import ChangePassword from "./components/ChangePassword/ChangePassword";
 import CreateTask from "./components/CreateTask/CreateTask";
+import MyTasks from "./components/MyTasks/MyTasks";
+import AllTasks from "./components/AllTasks/AllTasks";
 import "./App.css";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Route path="/change-username" element={<ChangeUsername />} />
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/createTask" element={<CreateTask />} />
+      <Route path="/mytasks" element={<MyTasks />} />
+      <Route path="/alltasks" element={<AllTasks />} />
     </Routes>
   );
 }

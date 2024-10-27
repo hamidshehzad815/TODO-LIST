@@ -19,8 +19,7 @@ router.delete("/delete-task/:taskId", [auth], async (req, res) => {
   const connection = await db.getConnection();
   const user = req.user;
   let query;
-
-  if (user.role === "Admin") {
+  if (user.role === "admin") {
     query = "DELETE FROM Task WHERE taskId = ?";
   } else {
     query = "DELETE FROM Task WHERE taskId = ? AND createdBy = ?";
@@ -44,14 +43,8 @@ router.post(
   "/createTask",
   [auth, ...requestValidations, validateRequest],
   async (req, res) => {
-    const {
-      title,
-      description,
-      dueDate,
-      priority,
-      status,
-      assignedTo,
-    } = req.body;
+    const { title, description, dueDate, priority, status, assignedTo } =
+      req.body;
     const connection = await db.getConnection();
     let sendMail = null;
     let assigneeId = null;
@@ -96,19 +89,29 @@ router.put(
     const { taskId } = req.params;
     const user = req.user;
     const isAdmin = user.role === "admin";
+    const formattedDueDate = dueDate
+      ? new Date(dueDate).toISOString().split("T")[0]
+      : null;
 
     const connection = await db.getConnection();
-
     const query = isAdmin
       ? "UPDATE Task SET title = COALESCE(?, title), description = COALESCE(?, description), dueDate = COALESCE(?, dueDate), priority = COALESCE(?, priority), status = COALESCE(?, status), updatedBy = ? WHERE taskId = ?"
       : "UPDATE Task SET title = COALESCE(?, title), description = COALESCE(?, description), dueDate = COALESCE(?, dueDate), priority = COALESCE(?, priority), status = COALESCE(?, status), updatedBy = ? WHERE taskId = ? AND (createdBy = ? OR assignedTo = ?)";
 
     const params = isAdmin
-      ? [title, description, dueDate, priority, status, user.userId, taskId]
+      ? [
+          title,
+          description,
+          formattedDueDate,
+          priority,
+          status,
+          user.userId,
+          taskId,
+        ]
       : [
           title,
           description,
-          dueDate,
+          formattedDueDate,
           priority,
           status,
           user.userId,
@@ -117,23 +120,18 @@ router.put(
           user.userId,
         ];
 
-    try {
-      const [result] = await connection.query(query, params);
+    const [result] = await connection.query(query, params);
 
-      if (result.affectedRows === 0) {
-        return res.status(404).send({ message: "Task Not Found" });
-      }
-
-      return res.status(200).send({ message: "Task updated" });
-    } catch (error) {
-      return res.status(500).send({ message: "Internal server error" });
-    } finally {
-      connection.release();
+    connection.release();
+    if (result.affectedRows === 0) {
+      return res.status(404).send({ message: "Task Not Found" });
     }
+
+    return res.status(200).send({ message: "Task updated" });
   }
 );
 
-router.get("/tasks", [auth], async (req, res) => {
+router.get("/mytasks", [auth], async (req, res) => {
   const connection = await db.getConnection();
   const user = req.user;
 
@@ -227,4 +225,68 @@ router.get("/taskById/:taskId", [auth], async (req, res) => {
   connection.release();
   return res.status(200).send(result[0]);
 });
+
+router.get(
+  "/allTasksBy/:sortBy/:sortingOrder?",
+  [auth, authorization],
+  async (req, res) => {
+    const sortBy = req.params.sortBy;
+    const sortingOrder = req.params.sortingOrder || "asc";
+    const allowedSortByFields = [
+      "title",
+      "description",
+      "dueDate",
+      "priority",
+      "status",
+    ];
+    const allowedSortingOrders = ["asc", "desc"];
+
+    if (!allowedSortByFields.includes(sortBy)) {
+      return res.status(400).send({ message: "Invalid sortBy field." });
+    }
+
+    if (!allowedSortingOrders.includes(sortingOrder.toLowerCase())) {
+      return res
+        .status(400)
+        .send({ message: "Invalid sorting order. Use 'asc' or 'desc'." });
+    }
+
+    const connection = await db.getConnection();
+    const query = `SELECT * FROM Task ORDER BY ${sortBy} ${sortingOrder.toUpperCase()}`;
+    const [tasks] = await connection.query(query);
+    connection.release();
+
+    if (tasks.length === 0) {
+      return res.status(404).send({ message: "No task found" });
+    }
+
+    return res.status(200).send(tasks);
+  }
+);
+
+router.get(
+  "/allTasksFilter/:columnName/:filterBy",
+  [auth, authorization],
+  async (req, res) => {
+    const filterBy = req.params.filterBy;
+    const columnName = req.params.columnName;
+    const allowedColumns = ["status", "priority"];
+
+    if (!allowedColumns.includes(columnName.toLowerCase())) {
+      return res.status(400).send({ message: "Invalid column name" });
+    }
+
+    const connection = await db.getConnection();
+    const query = `SELECT * FROM Task WHERE ${columnName} = ?`;
+    const [tasks] = await connection.query(query, [filterBy]);
+    connection.release();
+
+    if (tasks.length === 0) {
+      return res.status(404).send({ message: "No task found" });
+    }
+
+    return res.status(200).send(tasks);
+  }
+);
+
 export default router;

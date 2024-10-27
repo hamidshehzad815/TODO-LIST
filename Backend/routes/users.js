@@ -93,6 +93,13 @@ router.get("/profile", auth, async (req, res) => {
   }
 });
 
+router.get("/user/:userId", [auth, authorization], async (req, res) => {
+  const connection = await db.getConnection();
+  const query = "SELECT username from User Where UserId = ?";
+  const [results] = await connection.query(query, [req.params.userId]);
+  connection.release();
+  res.status(200).json(results[0]);
+});
 router.post("/logout", (req, res) => {
   return res.json({ message: "You have logged out!" });
 });

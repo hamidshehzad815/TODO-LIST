@@ -16,7 +16,8 @@
   min-height: 100vh;
   width: 100%;
   padding: 0 10px;
-  background: url('https://cdn.pixabay.com/photo/2016/03/27/22/22/space-1283629_960_720.jpg') no-repeat center center/cover;
+  background: url("https://cdn.pixabay.com/photo/2016/03/27/22/22/space-1283629_960_720.jpg")
+    no-repeat center center/cover;
 }
 
 .wrapper {
@@ -99,7 +100,8 @@ button:hover {
   color: #fff;
 }
 
-.error-popup, .success-popup {
+.error-popup,
+.success-popup {
   position: fixed;
   top: 10px;
   left: 50%;
@@ -140,7 +142,13 @@ body::before {
   left: 0; /* Ensure the image covers the whole body */
   width: 100%;
   height: 100%;
-  background: url("../../images/bg.png"), #000;
+  background: rgb(63, 94, 251);
+  background: linear-gradient(
+    90deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 41%,
+    rgba(224, 74, 129, 1) 85%
+  );
   background-position: center;
   background-size: cover;
   z-index: -1; /* Ensure the background is behind other elements */
