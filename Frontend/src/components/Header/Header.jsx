@@ -27,7 +27,12 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <div className="logo-circle"></div>
+        <img
+          src={require("../../images/LOGO.png")}
+          alt="Zentask Logo"
+          className="logo-circle"
+        />
+
         <span className="logo-text">TaskFlow</span>
       </div>
       <nav>

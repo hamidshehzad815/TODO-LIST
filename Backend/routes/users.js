@@ -177,7 +177,9 @@ router.put("/updateUsername", [auth], async (req, res) => {
   try {
     // Check if the new username already exists
     const checkQuery = "SELECT COUNT(*) as count FROM User WHERE username = ?";
-    const [checkResult] = await connection.query(checkQuery, [newUsername]);
+    const [checkResult] = await connection.query(checkQuery, [
+      newUsername.trim(),
+    ]);
 
     if (checkResult[0].count > 0) {
       connection.release();

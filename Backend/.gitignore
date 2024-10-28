@@ -4,3 +4,4 @@ node_modules
 .env
 # i have a test.js file how to add it
 some
+logs/
