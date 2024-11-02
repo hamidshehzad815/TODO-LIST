@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ className }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${className}`}>
       <div className="logo">
         <img
           src={require("../../images/LOGO.png")}
@@ -33,14 +33,16 @@ const Header = () => {
           className="logo-circle"
         />
 
-        <span className="logo-text">TaskFlow</span>
+        <span className="logo-text">ZenTask</span>
       </div>
       <nav>
-        <Link to="/">Home</Link>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#blog">Blog</a>
-        <a href="#support">Support</a>
+        <Link class="HOME" to="/">
+          Home
+        </Link>
+        {/* <a href="#features">Features</a> */}
+        {/* <a href="#pricing">Pricing</a> */}
+        {/* <a href="#blog">Blog</a> */}
+        {/* <a href="#support">Support</a> */}
       </nav>
       <div className="auth-buttons">
         {isLoggedIn ? (

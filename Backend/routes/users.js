@@ -87,6 +87,7 @@ router.get("/profile", auth, async (req, res) => {
     const [results] = await connection.query(query, [req.user.userId]);
     connection.release();
     res.setHeader("Cache-Control", "no-store");
+    
     res.status(200).json(results[0]);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch profile data" });
@@ -106,7 +107,7 @@ router.post("/logout", (req, res) => {
 
 router.get("/allusers", [auth, authorization], async (req, res) => {
   const connection = await db.getConnection();
-  const query = "SELECT * FROM User";
+  const query = "SELECT * FROM User order by role";
   const [users] = await connection.query(query);
 
   if (users.length === 0) {

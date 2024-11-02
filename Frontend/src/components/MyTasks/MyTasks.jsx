@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./MyTasks.css";
-
+import Header from "../Header/Header";
 const MyTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,8 +53,7 @@ const MyTasks = () => {
         setTasks(data);
         setError("");
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Failed to fetch tasks.");
+        setTasks([]);
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -345,6 +344,7 @@ const MyTasks = () => {
                       <span className="comment-date">
                         {formatDate(comment.createdAt)}
                       </span>
+                      <span>{comment.username}</span>
                     </div>
                     <p className="comment-content">{comment.commentBody}</p>
                   </div>
@@ -369,7 +369,7 @@ const MyTasks = () => {
           </div>
         </div>
       )}
-
+      <Header />
       <div className="tasks-header">
         <h2>My Tasks</h2>
         <div className="tasks-controls">

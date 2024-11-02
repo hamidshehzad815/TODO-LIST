@@ -1,9 +1,14 @@
-// src/components/Hero/Hero.jsx
-
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Hero.css";
 
 const Hero = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const handleGetStartedClick = () => {
+    navigate("/login"); // Navigate to /login on button click
+  };
+
   return (
     <section className="hero">
       <h1>
@@ -16,8 +21,9 @@ const Hero = () => {
         together.
       </p>
       <div className="hero-buttons">
-        <button className="btn btn-primary">Get Started Free</button>
-        <button className="btn btn-outline">Watch Demo</button>
+        <button className="btn btn-primary" onClick={handleGetStartedClick}>
+          Get Started Free
+        </button>
       </div>
     </section>
   );

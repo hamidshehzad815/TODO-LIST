@@ -144,7 +144,6 @@ router.get("/mytasks", [auth], async (req, res) => {
     LEFT JOIN User a ON t.assignedTo = a.userId
     WHERE t.createdBy = ? OR t.assignedTo = ?
   `;
-
   const [tasks] = await connection.query(query, [user.userId, user.userId]);
   connection.release();
 
@@ -169,15 +168,27 @@ router.get("/taskFilter/:columnName/:filterBy", [auth], async (req, res) => {
   const user = req.user;
   const filterBy = req.params.filterBy;
   const columnName = req.params.columnName;
-
+  console.log(req.params);
   const allowedColumns = ["status", "priority"];
   if (!allowedColumns.includes(columnName.toLowerCase())) {
     return res.status(400).send({ message: "Invalid column name" });
   }
 
   const connection = await db.getConnection();
-  const query = `SELECT * FROM Task WHERE ${columnName} = ? AND createdBy = ?`;
-  const [tasks] = await connection.query(query, [filterBy, user.userId]);
+  const query = `
+  SELECT t.*, 
+         c.username as createdByEmail,
+         a.username as assignedToEmail
+  FROM Task t
+  LEFT JOIN User c ON t.createdBy = c.userId
+  LEFT JOIN User a ON t.assignedTo = a.userId
+  WHERE ${columnName} = ? AND (t.createdBy = ? OR t.assignedTo = ?)
+`;
+  const [tasks] = await connection.query(query, [
+    filterBy.toLowerCase(),
+    user.userId,
+    user.userId,
+  ]);
   connection.release();
   if (tasks.length === 0)
     return res.status(404).send({ message: "No task found" });
@@ -208,9 +219,17 @@ router.get("/taskBy/:sortBy/:sortingOrder?", [auth], async (req, res) => {
       .send({ message: "Invalid sorting order. Use 'asc' or 'desc'." });
   }
   const connection = await db.getConnection();
-  const query = `SELECT * FROM Task WHERE createdBy = ? ORDER BY ${sortBy} ${sortingOrder.toUpperCase()}`;
-
-  const [tasks] = await connection.query(query, [user.userId]);
+  const query = `
+    SELECT t.*, 
+           c.username as createdByEmail,
+           a.username as assignedToEmail
+    FROM Task t
+    LEFT JOIN User c ON t.createdBy = c.userId
+    LEFT JOIN User a ON t.assignedTo = a.userId
+    WHERE t.createdBy = ? OR t.assignedTo = ?
+    ORDER BY ${sortBy} ${sortingOrder.toUpperCase()}
+  `;
+  const [tasks] = await connection.query(query, [user.userId, user.userId]);
   connection.release();
   if (tasks.length === 0)
     return res.status(404).send({ message: "No task found" });
@@ -275,10 +294,9 @@ router.get(
     if (!allowedColumns.includes(columnName.toLowerCase())) {
       return res.status(400).send({ message: "Invalid column name" });
     }
-
     const connection = await db.getConnection();
     const query = `SELECT * FROM Task WHERE ${columnName} = ?`;
-    const [tasks] = await connection.query(query, [filterBy]);
+    const [tasks] = await connection.query(query, [filterBy.toLowerCase()]);
     connection.release();
 
     if (tasks.length === 0) {

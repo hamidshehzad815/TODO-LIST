@@ -50,7 +50,9 @@ nav a:hover {
   display: flex;
   gap: 1rem;
 }
-
+.HOME {
+  color: black;
+}
 .btn-menu {
   background-color: #4a90e2;
   color: white;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Header from "../Header/Header";
 import "./AllTasks.css";
 
 const AllTasks = () => {
@@ -74,8 +75,8 @@ const AllTasks = () => {
         setTasks(tasksWithUsernames);
         setError("");
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Failed to fetch tasks.");
+        setTasks([]);
+        setError("");
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -266,6 +267,7 @@ const AllTasks = () => {
           </form>
         </div>
       )}
+      <Header/>
       <div className="tasks-header">
         <h2>All Tasks</h2>
         <div className="tasks-controls">

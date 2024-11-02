@@ -5,6 +5,16 @@
   background: #f8f9fa;
   min-height: 100vh;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: white !important;
+  align-items: center;
+  position: relative !important;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
 
 /* Header Section */
 .dashboard-header {
@@ -19,6 +29,7 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 75px;
 }
 
 .welcome-section h1 {

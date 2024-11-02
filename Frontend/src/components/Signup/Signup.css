@@ -10,14 +10,13 @@
 }
 
 .signup-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 2rem;
   min-height: 100vh;
-  width: 100%;
-  padding: 0 10px;
   background: url("https://cdn.pixabay.com/photo/2016/03/27/22/22/space-1283629_960_720.jpg")
     no-repeat center center/cover;
+}
+.signup-wrapper .rounded {
+  border-radius: 100px;
 }
 
 .wrapper {
@@ -106,16 +105,23 @@ button:hover {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: #ff4d4d;
-  color: white;
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   display: none; /* Initially hidden */
+  margin-top: 120px;
 }
 
 .error-popup.show {
+  background: #ff4d4d;
+  color: white;
+  display: block;
+}
+
+.success-popup.show {
+  background: #4caf50;
+  color: white;
   display: block;
 }
 

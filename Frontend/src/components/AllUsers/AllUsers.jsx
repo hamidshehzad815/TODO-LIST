@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import Header from "../Header/Header";
 import { AuthContext } from "../../context/AuthContext";
 import "./AllUsers.css";
 
@@ -71,6 +72,7 @@ const AllUsers = () => {
 
   return (
     <div className="all-users-container">
+      <Header/>
       {error && <div className="error-message">{error}</div>}
       <h2>All Users</h2>
       {users.length === 0 ? (

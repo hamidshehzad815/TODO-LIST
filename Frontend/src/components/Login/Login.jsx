@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 import "./Login.css";
 
 const Login = () => {
@@ -81,6 +82,7 @@ const Login = () => {
       {successMessage && (
         <div className="success-popup show">{successMessage}</div>
       )}
+      <Header className="rounded" />
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
           <h2>Login</h2>

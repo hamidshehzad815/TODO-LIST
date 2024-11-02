@@ -5,3 +5,7 @@ node_modules
 # i have a test.js file how to add it
 some
 logs/
+coverage/
+test/
+jest.config.js
+utils/

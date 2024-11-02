@@ -1,10 +1,7 @@
 .account-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  padding: 2rem;
   min-height: 100vh;
-  padding: 40px 20px;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .account-card {
@@ -15,6 +12,7 @@
   max-width: 800px;
   padding: 40px;
   margin-top: 100px;
+  margin-left: 300px;
 }
 
 .account-card h2 {

@@ -1,7 +1,8 @@
 // Profile.jsx
 import React, { useEffect, useState } from "react";
+import Header from "../Header/Header";
 import "./Profile.css";
-import { FaUser, FaEnvelope, FaUserShield } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaUserShield } from "react-icons/fa";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -14,8 +15,8 @@ const Profile = () => {
         const token = localStorage.getItem("token");
         const response = await fetch("http://localhost:8000/users/profile", {
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         if (response.ok) {
           const data = await response.json();
@@ -40,12 +41,8 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      {errorMessage && (
-        <div className="error-message">
-          {errorMessage}
-        </div>
-      )}
-      
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <Header />
       {profile && (
         <div className="profile-card">
           <div className="profile-header">
@@ -55,7 +52,7 @@ const Profile = () => {
             <h2 className="profile-name">{profile.username}</h2>
             <span className="profile-role-badge">{profile.role}</span>
           </div>
-          
+
           <div className="profile-info">
             <div className="info-item">
               <FaUser className="info-icon" />
@@ -64,7 +61,7 @@ const Profile = () => {
                 <span>{profile.username}</span>
               </div>
             </div>
-            
+
             <div className="info-item">
               <FaEnvelope className="info-icon" />
               <div className="info-content">
@@ -72,7 +69,7 @@ const Profile = () => {
                 <span>{profile.email}</span>
               </div>
             </div>
-            
+
             <div className="info-item">
               <FaUserShield className="info-icon" />
               <div className="info-content">

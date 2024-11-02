@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import Header from "../Header/Header";
 import { AuthContext } from "../../context/AuthContext";
 import {
   FaUsers,
@@ -109,6 +110,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      <Header />
       <div className="dashboard-header">
         <div className="welcome-section">
           <h1>

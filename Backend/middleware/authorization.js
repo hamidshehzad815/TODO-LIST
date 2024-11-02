@@ -9,9 +9,9 @@ export default function (req, res, next) {
   }
 
   if (user.role !== ADMIN_ROLE) {
-    console.warn(
-      `Unauthorized access attempt: User ${user.id} tried to access admin endpoint.`
-    );
+    // console.warn(
+      // `Unauthorized access attempt: User ${user.id} tried to access admin endpoint.`
+    // );
     return res
       .status(403)
       .send({ message: "Access to this endpoint is forbidden" });
