@@ -2,7 +2,12 @@
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
+  background: linear-gradient(
+    180.3deg,
+    rgb(110, 136, 161) 25%,
+    rgb(221, 221, 221) 50%,
+    rgb(110, 136, 161) 90.2%
+  );
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -47,6 +52,7 @@
   border-radius: 8px;
   font-size: 1rem;
   color: #2d3748;
+  background-color: rgba(255, 255, 255, 0.554);
 }
 
 .input-field2 input:focus + label,
@@ -96,4 +102,21 @@
 
 .btn-submit:hover {
   background-color: #2b6cb0;
+}
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  background-color: #4a5a63; /* Adjust color as needed */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000; /* Keeps the button on top */
+}
+
+.back-button:hover {
+  background-color: #3c4b52; /* Darker shade on hover */
 }

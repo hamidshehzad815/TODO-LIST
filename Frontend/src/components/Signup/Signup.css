@@ -24,9 +24,9 @@
   padding: 30px;
   border-radius: 8px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgb(255, 255, 255);
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(to right, #f6f2ee, #2e3f48);
 }
 
 form {
@@ -173,10 +173,15 @@ body::before {
   left: 0; /* Ensure the image covers the whole body */
   width: 100%;
   height: 100%;
-  background: linear-gradient(327deg, #c63c1d, #3f47b9, #8ec61d, #c61d1d);
+  background: linear-gradient(
+    180.3deg,
+    rgb(110, 136, 161) 45%,
+    rgb(221, 221, 221) 50%
+  );
+
   background-size: 800% 800%;
 
-  animation: AnimationName 8s ease infinite;
+  /* animation: AnimationName 8s ease infinite; */
 
   background-position: center;
   z-index: -1; /* Ensure the background is behind other elements */

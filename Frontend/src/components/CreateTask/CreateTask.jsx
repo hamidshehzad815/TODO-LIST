@@ -12,6 +12,7 @@ const CreateTask = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -60,8 +61,15 @@ const CreateTask = () => {
     }
   };
 
+  const goBack = () => {
+    navigate(-1); // Navigate back to the previous page in history
+  };
+
   return (
     <div className="create-task-container">
+      <button onClick={goBack} className="back-button">
+        &#8592;
+      </button>
       <h2>Create Task</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-field2">
