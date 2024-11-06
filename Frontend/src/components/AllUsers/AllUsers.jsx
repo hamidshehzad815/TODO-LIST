@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import Header from "../Header/Header";
 import { AuthContext } from "../../context/AuthContext";
+
+import { useNavigate } from "react-router-dom";
 import "./AllUsers.css";
 
 const AllUsers = () => {
@@ -12,6 +14,7 @@ const AllUsers = () => {
     userId: null,
   });
   const { userRole } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -69,10 +72,15 @@ const AllUsers = () => {
   if (loading) {
     return <div className="loader"></div>;
   }
-
+  const goBack = () => {
+    navigate(-1); // Navigate back to the previous page in history
+  };
   return (
     <div className="all-users-container">
-      <Header/>
+      <Header />
+      <button onClick={goBack} className="back-button">
+        &#8592;
+      </button>
       {error && <div className="error-message">{error}</div>}
       <h2>All Users</h2>
       {users.length === 0 ? (

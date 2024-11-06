@@ -42,7 +42,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <Header />
+      <Header className="stayTop" />
       {profile && (
         <div className="profile-card">
           <div className="profile-header">

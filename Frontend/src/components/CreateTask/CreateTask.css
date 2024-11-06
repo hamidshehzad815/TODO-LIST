@@ -11,6 +11,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-top: 100px;
 }
 
 .create-task-container h2 {
@@ -62,7 +63,7 @@
   top: -10px;
   left: 10px;
   font-size: 0.75rem;
-  color: #3182ce;
+  color: black;
 }
 
 .input-field2 input:focus,
@@ -104,7 +105,7 @@
   background-color: #2b6cb0;
 }
 .back-button {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 20px;
   padding: 10px 15px;

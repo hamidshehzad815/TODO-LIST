@@ -1,9 +1,13 @@
 import express from "express";
+import cron from "node-cron";
 const router = express.Router();
 import db from "../database/database.js";
 import auth from "../middleware/auth.js";
 import authorization from "../middleware/authorization.js";
-import { taskAssignedEmail as sendEmail } from "../services/sendEmail.js";
+import {
+  taskAssignedEmail as sendEmail,
+  sendReminderEmail,
+} from "../services/sendEmail.js";
 import {
   requestValidations,
   validateRequest,
@@ -71,9 +75,31 @@ router.post(
       user.userId,
       assigneeId,
     ]);
-
+    console.log(result);
     if (sendMail) {
       sendEmail(user, sendMail);
+    }
+
+    const reminderDate = new Date(dueDate);
+    reminderDate.setHours(reminderDate.getHours() - 2);
+
+    const now = new Date();
+    const delay = reminderDate - now;
+
+    if (delay > 0) {
+      // Schedule the email to be sent at the calculated time
+      console.log("Scheduled");
+      cron.schedule(
+        `0 ${reminderDate.getMinutes()} ${reminderDate.getHours()} * * *`,
+        async () => {
+          await sendReminderEmail(user, {
+            title,
+            description: description || "",
+            dueDate,
+            priority,
+          });
+        }
+      );
     }
 
     connection.release();

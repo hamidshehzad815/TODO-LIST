@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
+
+import { useNavigate } from "react-router-dom";
 import "./AllTasks.css";
 
 const AllTasks = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -178,7 +181,9 @@ const AllTasks = () => {
   if (loading) {
     return <div className="loader"></div>;
   }
-
+  const goBack = () => {
+    navigate(-1); // Navigate back to the previous page in history
+  };
   return (
     <div className="all-tasks-container">
       {error && <div className="error-message">{error}</div>}
@@ -267,7 +272,10 @@ const AllTasks = () => {
           </form>
         </div>
       )}
-      <Header/>
+      <Header />
+      <button onClick={goBack} className="back-button">
+        &#8592;
+      </button>
       <div className="tasks-header">
         <h2>All Tasks</h2>
         <div className="tasks-controls">

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MyTasks.css";
+
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 const MyTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -28,6 +30,7 @@ const MyTasks = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
+  const navigate = useNavigate();
   useEffect(() => {
     fetchTasks();
   }, [filterConfig, sortConfig]);
@@ -227,7 +230,9 @@ const MyTasks = () => {
   if (loading) {
     return <div className="loader"></div>;
   }
-
+  const goBack = () => {
+    navigate(-1); // Navigate back to the previous page in history
+  };
   return (
     <div className="my-tasks-container">
       {error && <div className="error-message">{error}</div>}
@@ -370,6 +375,9 @@ const MyTasks = () => {
         </div>
       )}
       <Header />
+      <button onClick={goBack} className="back-button">
+        &#8592;
+      </button>
       <div className="tasks-header">
         <h2>My Tasks</h2>
         <div className="tasks-controls">

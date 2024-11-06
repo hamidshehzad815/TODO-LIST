@@ -1,19 +1,23 @@
 .dashboard-container {
   padding: 2rem;
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
   background: #f8f9fa;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
   background: white !important;
   align-items: center;
-  position: relative !important;
-  width: 100%;
+  position: sticky; /* Use sticky for better scrolling behavior */
   top: 0;
   z-index: 1000;
+  width: 100%;
+  padding: 1rem 2rem;
 }
 
 /* Header Section */
@@ -29,7 +33,7 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 75px;
+  margin-top: 2rem;
 }
 
 .welcome-section h1 {
@@ -48,6 +52,7 @@
 
 /* Dashboard Main Section */
 .dashboard-main {
+  flex: 1;
   margin-bottom: 2rem;
 }
 

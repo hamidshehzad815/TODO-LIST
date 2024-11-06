@@ -5,7 +5,7 @@ import "./CreateTask.css";
 const CreateTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState(""); // This will now include date and time
   const [priority, setPriority] = useState("");
   const [status, setStatus] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
@@ -22,7 +22,7 @@ const CreateTask = () => {
       const token = localStorage.getItem("token");
       const payload = { title };
       if (description) payload.description = description;
-      if (dueDate) payload.dueDate = dueDate;
+      if (dueDate) payload.dueDate = dueDate; // This will now include both date and time
       if (priority) payload.priority = priority;
       if (!priority) payload.priority = "low";
       if (status) payload.status = status;
@@ -97,13 +97,13 @@ const CreateTask = () => {
         </div>
         <div className="input-field2">
           <input
-            type="date"
+            type="datetime-local" // Changed to datetime-local
             id="dueDate"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />
           <label htmlFor="dueDate" className={dueDate ? "active" : ""}>
-            Due Date
+            Due Date and Time
           </label>
         </div>
         <div className="input-field2">

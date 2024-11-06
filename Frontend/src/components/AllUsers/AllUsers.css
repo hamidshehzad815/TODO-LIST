@@ -1,9 +1,13 @@
 .all-users-container {
   padding: 2rem;
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
   background: #f8f9fa;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
 .all-users-container h2 {
@@ -138,4 +142,9 @@
 
 .confirmation-card .btn-no:hover {
   background-color: #c53030;
+}
+
+.back-button {
+  margin-top: 27px;
+  margin-left: 20px;
 }

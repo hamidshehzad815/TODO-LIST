@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const Header = ({ className }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate(); // Get the history instance
 
   useEffect(() => {
     // Check if user is logged in by checking localStorage or a similar method
@@ -18,6 +19,7 @@ const Header = ({ className }) => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setIsSidebarOpen(false);
+    navigate("/");
   };
 
   const toggleSidebar = () => {
@@ -32,11 +34,10 @@ const Header = ({ className }) => {
           alt="Zentask Logo"
           className="logo-circle"
         />
-
         <span className="logo-text">ZenTask</span>
       </div>
       <nav>
-        <Link class="HOME" to="/">
+        <Link className="HOME" to="/">
           Home
         </Link>
         {/* <a href="#features">Features</a> */}

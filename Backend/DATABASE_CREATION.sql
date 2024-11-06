@@ -33,17 +33,17 @@ CREATE TABLE Task (
     taskId int NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     description VARCHAR(500) DEFAULT NULL,
-    dueDate DATE DEFAULT NULL,
+    dueDate TIMESTAMP DEFAULT NULL,
     priority ENUM('low', 'medium', 'high') DEFAULT 'low',
     status ENUM('pending', 'completed') DEFAULT 'pending',
     createdBy int NOT NULL,
     updatedBy int DEFAULT NULL,
-    assignedTo int DEFAULT NULL,  -- Changed to int
+    assignedTo int DEFAULT NULL, -- Changed to int
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (taskId),
     FOREIGN KEY (createdBy) REFERENCES User (userId) ON DELETE CASCADE,
-    FOREIGN KEY (assignedTo) REFERENCES User (userId) ON DELETE SET NULL,  -- Updated reference
+    FOREIGN KEY (assignedTo) REFERENCES User (userId) ON DELETE SET NULL, -- Updated reference
     FOREIGN KEY (updatedBy) REFERENCES User (userId) ON DELETE SET NULL
 );
 
@@ -61,4 +61,5 @@ CREATE TABLE Comment (
 
 -- Sample select queries
 SELECT * FROM User;
+
 SELECT * FROM Task ORDER BY priority;

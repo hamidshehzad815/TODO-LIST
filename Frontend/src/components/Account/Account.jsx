@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Account = () => {
   return (
     <div className="account-container">
-      <Header />
+      <Header className="stayTop" />
       <div className="account-card">
         <h2>Account Settings</h2>
         <div className="account-option">
