@@ -374,7 +374,7 @@ const MyTasks = () => {
           </div>
         </div>
       )}
-      <Header />
+      <Header className="rounded"/>
       <button onClick={goBack} className="back-button">
         &#8592;
       </button>

@@ -9,7 +9,9 @@
   justify-content: center; /* Center content vertically */
   align-items: center; /* Center content horizontally */
 }
-
+.all-users-container .rounded{
+  border-radius: 25px;
+}
 .all-users-container h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;

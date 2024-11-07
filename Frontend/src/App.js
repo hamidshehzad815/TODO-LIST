@@ -12,6 +12,7 @@ import ChangePassword from "./components/ChangePassword/ChangePassword";
 import CreateTask from "./components/CreateTask/CreateTask";
 import MyTasks from "./components/MyTasks/MyTasks";
 import AllTasks from "./components/AllTasks/AllTasks";
+import TaskAnalytics from "./components/myTaskAnalytics/Analytics";
 import "./App.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/createTask" element={<CreateTask />} />
       <Route path="/mytasks" element={<MyTasks />} />
       <Route path="/alltasks" element={<AllTasks />} />
+      <Route path="/Analytics" element={<TaskAnalytics />} />
     </Routes>
   );
 }

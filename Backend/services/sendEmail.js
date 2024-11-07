@@ -216,7 +216,7 @@ async function sendReminderEmail(creator, taskDetails) {
       </div>
     `,
   };
-
+  console.log("sent");
   await transporter.sendMail(mailOptions);
 }
 

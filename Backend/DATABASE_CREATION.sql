@@ -63,3 +63,11 @@ CREATE TABLE Comment (
 SELECT * FROM User;
 
 SELECT * FROM Task ORDER BY priority;
+
+SELECT 
+    COUNT(*) AS totalTasks,
+    SUM(status = 'pending') AS pendingTasks,
+    SUM(status = 'completed') AS completedTasks
+FROM 
+    Task
+WHERE `createdBy` = 2

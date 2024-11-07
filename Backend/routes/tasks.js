@@ -333,4 +333,20 @@ router.get(
   }
 );
 
+router.get("/mytaskAnalytics", [auth], async (req, res) => {
+  const connection = await db.getConnection();
+  const user = req.user;
+  const query =
+    "SELECT COUNT(*) AS totalTasks,SUM(status = 'pending') AS pendingTasks,SUM(status = 'completed') AS completedTasks FROM Task WHERE `createdBy` = ?";
+  const [result] = await connection.query(query, [user.userId]);
+  result[0].pendingTasks = parseInt(result[0].pendingTasks);
+  result[0].completedTasks = parseInt(result[0].completedTasks);
+  const data = result[0];
+  connection.release();
+  if (!data.totalTasks) {
+    return res.status(200).send({ message: "no task found" });
+  }
+  return res.status(200).send(data);
+});
+
 export default router;

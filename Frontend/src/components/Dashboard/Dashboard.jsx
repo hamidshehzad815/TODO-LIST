@@ -8,6 +8,8 @@ import {
   FaPlusCircle,
   FaClock,
 } from "react-icons/fa";
+import { IoMdAnalytics } from "react-icons/io";
+
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -85,6 +87,12 @@ const Dashboard = () => {
           link: "/createtask",
           color: "orange",
         },
+        {
+          icon: <IoMdAnalytics />,
+          label: "Analytics",
+          link: "/Analytics",
+          color: "gray",
+        },
       ]);
     } else {
       setButtons([
@@ -100,6 +108,12 @@ const Dashboard = () => {
           link: "/createtask",
           color: "orange",
         },
+        {
+          icon: <IoMdAnalytics />,
+          label: "Analytics",
+          link: "/Analytics",
+          color: "gray",
+        },
       ]);
     }
   }, [userRole]);
@@ -110,7 +124,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <Header />
+      <Header className="rounded" />
       <div className="dashboard-header">
         <div className="welcome-section">
           <h1>

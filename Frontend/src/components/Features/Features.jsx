@@ -15,11 +15,11 @@ const Features = () => {
       title: "Collaboration",
       description: "Work together seamlessly",
     },
-    // {
-    //   icon: "#FF7676",
-    //   title: "Analytics",
-    //   description: "Track team performance",
-    // },
+    {
+      icon: "#FF7676",
+      title: "Analytics",
+      description: "Track performance",
+    },
   ];
 
   return (

@@ -5,7 +5,6 @@ export default function (req, res, next) {
   if (!authHeader)
     return res.status(400).send({ message: "Authorization header missing" });
   if (!token) return res.status(400).send({ message: "Bearer token missing" });
-
   jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
     if (err) {
       if (err.name === "TokenExpiredError") {
